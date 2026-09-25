@@ -1,0 +1,10 @@
+{
+  "name": "CCD Control 395",
+  "author": "fishersonic",
+  "flags": ["root"],
+  "api_version": 1,
+  "publish": {
+    "tags": ["system", "performance", "amd", "root"],
+    "description": "SteamOS-only CCD control for Ryzen AI Max+ 395 systems."
+  }
+}
