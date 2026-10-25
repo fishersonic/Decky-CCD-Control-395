@@ -1,0 +1,13 @@
+{
+  "kernel_repository": "https://github.com/evlaV/linux-integration.git",
+  "kernel_tag": "7.2.7-valve2",
+  "kernel_commit": "31504582a07316ae0e8a8fb3b8fdc39d94842816",
+  "packaging_commit": "1200e0d00d484532c5ccbb4fda1322a984892f33",
+  "patch_source": "https://patchew.org/linux/20260826171537.4167367-1-Vishal.Badole@amd.com/mbox",
+  "local_version": "-ccdtest1",
+  "files": {
+    "config/config-neptune": "b91c3ed65067704c8fdb8289d44ed18aa62f98f52c3b6d91fb72bc5b1606ae79",
+    "config/config.x86_64": "ecd8c76eb203493e67ba4052e7bc1fa46f51c91566f102172e7a18d7de2dd5eb",
+    "patches/0001-group-cpus-snapshot-v4.patch": "b86b70cf4f34b1e5556feb56c02e9681382c5c02167e35910454cd4316565a52"
+  }
+}

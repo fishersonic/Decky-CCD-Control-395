@@ -1,0 +1,3 @@
+kernel-test/** text eol=lf
+.github/workflows/build-ccd-test-kernel.yml text eol=lf
+kernel-test/patches/*.patch -whitespace
