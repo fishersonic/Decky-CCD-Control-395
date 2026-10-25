@@ -27,17 +27,20 @@ export RUST_LIB_SRC="$(rustc --print sysroot)/lib/rustlib/src/rust/library"
 make rustavailable
 make olddefconfig
 cp .config "$recipe/logs/baseline.config"
-# Retain hardware drivers; omit DWARF/BTF to fit the hosted runner.
+# Retain BTF/sched-ext and hardware drivers; compress DWARF to save disk space.
 scripts/config --set-str LOCALVERSION '-ccdtest1' --disable LOCALVERSION_AUTO \
-    --disable DEBUG_INFO --disable DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT \
-    --disable DEBUG_INFO_DWARF4 --disable DEBUG_INFO_DWARF5 \
-    --disable DEBUG_INFO_BTF --disable DEBUG_INFO_BTF_MODULES --enable DEBUG_INFO_NONE
+    --disable DEBUG_INFO_COMPRESSED_NONE --disable DEBUG_INFO_COMPRESSED_ZLIB \
+    --enable DEBUG_INFO_COMPRESSED_ZSTD
 make olddefconfig
 scripts/diffconfig "$recipe/logs/baseline.config" .config > "$recipe/logs/config-diff.txt"
 cp .config "$recipe/logs/test.config"
 grep -Fx 'CONFIG_RUST=y' .config
 grep -Fx 'CONFIG_KALLSYMS_ALL=y' .config
-release=$(make -s kernelrelease)
+grep -Fx 'CONFIG_SCHED_CLASS_EXT=y' .config
+# Generate auto.conf separately, so configuration output is not captured as a version.
+make prepare
+release=$(make -s --no-print-directory LOCALVERSION= kernelrelease)
+printf 'Test kernel release: <%s>\n' "$release"
 test "$release" = '7.2.7-valve2-ccdtest1'
 export KBUILD_BUILD_USER=ccd-test KBUILD_BUILD_HOST=github-actions
 export KBUILD_BUILD_TIMESTAMP="$(git show -s --format=%cD HEAD)"

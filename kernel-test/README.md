@@ -6,7 +6,7 @@
 应用 AMD 开发者的 lib/group_cpus 集群快照 v4 补丁，用于验证部分 CPU 下线后睡眠恢复的 NVMe I/O 超时问题。
 独立版本名为 7.2.7-valve2-ccdtest1，不与官方模块目录重名。
 
-使用同版本 Valve 配置，保留硬件驱动。为控制云端空间，关闭 DWARF/BTF 调试信息；BTF 相关调试和追踪功能会受影响。
+使用同版本 Valve 配置，保留硬件驱动、BTF 和 sched-ext。为控制云端空间，使用 Zstandard 压缩 DWARF 调试信息。
 完整配置、配置差异、源码版本、编译器信息和关键模块 vermagic 随产物提供。
 
 ## 产物
@@ -31,7 +31,7 @@ CI 不安装到掌机，不修改启动菜单，不自动发布 Release。编译
 ## English
 
 Pinned Valve 7.2.7-valve2 with the upstream v4 CPU cluster snapshot patch, using a separate -ccdtest1 release.
-Hardware drivers are retained; DWARF/BTF information is omitted and all configuration changes are recorded.
+Hardware drivers, BTF and sched-ext are retained; DWARF information is Zstandard-compressed and all configuration changes are recorded.
 Artifacts include the kernel image, matching modules, checksums and corresponding source.
 No installation, initramfs generation, bootloader changes or hardware tests are performed by CI.
 Do not extract the binary archive over /; retain the official kernel and prepare a separate test boot entry.
